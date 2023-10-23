@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Button, Typography, Container, Grid, Grow, AppBar, Toolbar, Box, CssBaseline } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
 import Notification from '../components/Notification';
+import { useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import axios from 'axios';
 import api from '../api';
 
 function ModulesPage() {
+    const navigate = useNavigate();
     const [modules, setModules] = useState([]);
     const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
     const [moduleToDelete, setModuleToDelete] = useState(null);
@@ -90,18 +94,35 @@ function ModulesPage() {
                                                 <Typography variant="body2" color="text.secondary">
                                                     {module.description}
                                                 </Typography>
-                                                <Button variant="contained" color="primary">
-                                                    View Details
+                                                <Button variant="contained" color="primary"
+                                                    size="small"
+                                                    startIcon={<VisibilityIcon />}
+                                                    onClick={() => navigate(`/superadmin/modules/${module._id}`)}
+                                                >
+                                                    View
+                                                </Button>
+
+                                                <Button
+                                                    variant="contained"
+                                                    color="success" // Use the desired color
+                                                    size="small"
+                                                    startIcon={<EditIcon />} // Use the "Edit" icon
+                                                    onClick={() => navigate(`/superadmin/modules/edit/${module._id}`)} // Edit route
+                                                >
+                                                    Edit
+                                                </Button>
+
+                                                <Button
+                                                    variant="contained"
+                                                    color="error"
+                                                    size="small"
+                                                    startIcon={<DeleteIcon />}
+                                                    onClick={() => openConfirmDialog(module)}
+                                                    sx={{ width: "100px" }} // Adjust the width as needed
+                                                >
+                                                    Delete
                                                 </Button>
                                             </CardContent>
-                                            <Button
-                                                variant="contained"
-                                                color="error" // You can adjust the color to match your theme
-                                                startIcon={<DeleteIcon />}
-                                                onClick={() => openConfirmDialog(module)}
-                                            >
-                                                Delete
-                                            </Button>
                                             <DeleteConfirmationDialog
                                                 open={isConfirmDialogOpen}
                                                 onClose={closeConfirmDialog}

@@ -11,12 +11,14 @@ import {
     CssBaseline,
     TextField,
     Button,
+    Input,
 } from '@mui/material';
 
 function CreateModuleForm() {
     const navigate = useNavigate();
     const [moduleName, setModuleName] = useState('');
     const [moduleDescription, setModuleDescription] = useState('');
+    const [file, setFile] = useState(null);
     const [notification, setNotification] = useState({
         open: false,
         message: '',
@@ -24,13 +26,13 @@ function CreateModuleForm() {
     });
 
     const handleModuleCreate = () => {
-        const data = {
-            name: moduleName,
-            description: moduleDescription,
-        };
+        const formData = new FormData();
+        formData.append('name', moduleName);
+        formData.append('description', moduleDescription);
+        formData.append('file', file);
 
         // Make a POST request to the backend's /create route
-        api.post('/api/modules/create', data)
+        api.post('/api/modules/create', formData)
             .then((response) => {
                 console.log('Module created successfully:', response.data);
                 setNotification({
@@ -63,7 +65,7 @@ function CreateModuleForm() {
                 </Toolbar>
             </AppBar>
             <Container>
-                <form>
+                <form encType="multipart/form-data"> {/* Set encType for file uploads */}
                     <TextField
                         label="Module Name"
                         fullWidth
@@ -78,7 +80,13 @@ function CreateModuleForm() {
                         value={moduleDescription}
                         onChange={(e) => setModuleDescription(e.target.value)}
                     />
-                    <Button
+                    <Input
+                        type="file"
+                        fullWidth
+                        margin="normal"
+                        onChange={(e) => setFile(e.target.files[0])}
+                    />
+                    <Button sx={{ marginTop: '10px' }}
                         variant="contained"
                         color="primary"
                         onClick={handleModuleCreate}

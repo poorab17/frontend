@@ -86,6 +86,8 @@ import jwtDecode from "jwt-decode";
 import CreateModuleForm from './pages/CreateModuleForm';
 import TenantsPage from './pages/TenantsPage';
 import CreateTenantForm from './pages/CreateTenantForm';
+import EditModuleForm from './pages/EditModuleForm';
+import ViewModulePage from './pages/ViewModulePage';
 
 function App() {
   const [user, setUser] = useState({
@@ -155,6 +157,16 @@ function App() {
       <Route
         path="/superadmin/modules/create"
         element={user.isAuthenticated && user.role === 'superadmin' ? <CreateModuleForm /> : <Navigate to="/login" />}
+      />
+
+      <Route
+        path="/superadmin/modules/edit/:moduleId"
+        element={user.isAuthenticated && user.role === 'superadmin' ? <EditModuleForm /> : <Navigate to="/login" />}
+      />
+
+      <Route
+        path="/superadmin/modules/:moduleId"
+        element={user.isAuthenticated && user.role === 'superadmin' ? <ViewModulePage /> : <Navigate to="/login" />}
       />
 
       <Route
