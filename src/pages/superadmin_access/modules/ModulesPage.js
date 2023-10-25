@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
-import Notification from '../components/Notification';
+import Notification from '../../../components/Notification';
 import { useNavigate } from 'react-router-dom';
-import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
+import DeleteConfirmationDialog from '../../../components/DeleteConfirmationDialog';
 import axios from 'axios';
-import api from '../api';
+import api from '../../../api';
 
 function ModulesPage() {
     const navigate = useNavigate();
@@ -78,6 +78,16 @@ function ModulesPage() {
                     </Button>
                 </Toolbar>
             </AppBar>
+            <Button
+                component={Link} // Using RouterLink from react-router-dom
+                to="/superadmin"
+                variant="outlined"
+                color="primary"
+                style={{ marginTop: "20px", marginLeft: "20px", maxWidth: "100px" }}
+                size="small"
+            >
+                Back
+            </Button>
             <Container>
                 <Box sx={{ padding: '30px' }}></Box>
                 <div>

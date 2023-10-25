@@ -80,14 +80,18 @@ import Login from './components/Login';
 import Cookies from 'js-cookie';
 import SuperAdmin from './dashboard/SuperAdmin';
 import Tenant from './dashboard/Tenant';
-import ModulesPage from './pages/ModulesPage';
+import ModulesPage from './pages/superadmin_access/modules/ModulesPage';
 import Customer from './dashboard/Customer';
 import jwtDecode from "jwt-decode";
-import CreateModuleForm from './pages/CreateModuleForm';
-import TenantsPage from './pages/TenantsPage';
-import CreateTenantForm from './pages/CreateTenantForm';
-import EditModuleForm from './pages/EditModuleForm';
-import ViewModulePage from './pages/ViewModulePage';
+import CreateModuleForm from './pages/superadmin_access/modules/CreateModuleForm';
+import TenantsPage from './pages/superadmin_access/tenants/TenantsPage';
+import CreateTenantForm from './pages/superadmin_access/tenants/CreateTenantForm';
+import EditModuleForm from './pages/superadmin_access/modules/EditModuleForm';
+import ViewModulePage from './pages/superadmin_access/modules/ViewModulePage';
+import PermissionForm from './pages/superadmin_access/permission/PermisssionForm';
+import PermissionDetails from './pages/superadmin_access/permission/PermisssionDetails';
+import EditTenantForm from './pages/superadmin_access/tenants/EditTenantForm';
+import ViewTenantForm from './pages/superadmin_access/tenants/ViewTenantForm';
 
 function App() {
   const [user, setUser] = useState({
@@ -175,9 +179,31 @@ function App() {
       />
 
       <Route
+        path="/superadmin/tenants/:tenantId/edit"
+        element={user.isAuthenticated && user.role === 'superadmin' ? <EditTenantForm /> : <Navigate to="/login" />}
+      />
+
+      <Route
+        path="/superadmin/tenants/:tenantId/view"
+        element={user.isAuthenticated && user.role === 'superadmin' ? <ViewTenantForm /> : <Navigate to="/login" />}
+      />
+
+      <Route
         path="/superadmin/tenants/create"
         element={user.isAuthenticated && user.role === 'superadmin' ? <CreateTenantForm /> : <Navigate to="/login" />}
       />
+
+      <Route
+        path="/superadmin/permission/details"
+        element={user.isAuthenticated && user.role === 'superadmin' ? <PermissionDetails /> : <Navigate to="/login" />}
+      />
+
+      <Route
+        path="/superadmin/permission/create"
+        element={user.isAuthenticated && user.role === 'superadmin' ? <PermissionForm /> : <Navigate to="/login" />}
+      />
+
+
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

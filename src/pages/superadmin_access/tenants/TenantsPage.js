@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import api from "../api";
+import api from "../../../api";
 import {
     Table,
     TableBody,
@@ -26,10 +26,13 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
+import EditIcon from "@mui/icons-material/Edit"
+import DeleteConfirmationDialog from "../../../components/DeleteConfirmationDialog";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useNavigate } from "react-router-dom";
 
 function TenantsPage() {
+    const navigate = useNavigate();
     const [tenants, setTenants] = useState([]);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [tenantToDelete, setTenantToDelete] = useState(null);
@@ -100,6 +103,16 @@ function TenantsPage() {
                     </Button>
                 </Toolbar>
             </AppBar>
+
+            <Button
+                component={Link} // Use RouterLink from react-router-dom
+                to="/superadmin"
+                variant="outlined"
+                color="primary"
+                style={{ marginTop: "5px" }}
+            >
+                Back
+            </Button>
             <Container>
                 <Box sx={{ padding: "30px" }}></Box>
                 <div>
@@ -165,11 +178,27 @@ function TenantsPage() {
                                                     color="primary"
                                                     size="small"
                                                     startIcon={<VisibilityIcon />}
+                                                    onClick={() =>
+                                                        navigate(`/superadmin/tenants/${tenant._id}/view`)
+                                                    } // view tenant route
+                                                    sx={{ margin: "4px" }}
                                                 >
                                                     View
                                                 </Button>
-                                            </TableCell>
-                                            <TableCell>
+
+                                                <Button
+                                                    variant="contained"
+                                                    color="success" // Use the desired color
+                                                    size="small"
+                                                    startIcon={<EditIcon />} // Use the "Edit" icon
+                                                    onClick={() =>
+                                                        navigate(`/superadmin/tenants/${tenant._id}/edit`)
+                                                    } // Edit route
+                                                    sx={{ margin: "4px" }}
+                                                >
+                                                    Edit
+                                                </Button>
+
                                                 <Button
                                                     variant="contained"
                                                     color="error"

@@ -44,7 +44,7 @@ function SuperAdmin({ children }) {
                                     </ListItemIcon>
                                     <ListItemText primary="Tenants" />
                                 </ListItem>
-                                <ListItem button component={Link} to="/superadmin/permissions">
+                                <ListItem button component={Link} to="/superadmin/permission/details">
                                     <ListItemIcon>
                                         <SecurityIcon />
                                     </ListItemIcon>

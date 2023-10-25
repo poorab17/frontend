@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Notification from '../components/Notification';
+import Notification from '../../../components/Notification';
 import {
     AppBar,
     Toolbar,
@@ -11,7 +11,7 @@ import {
     TextField,
     Button,
 } from '@mui/material';
-import api from '../api';
+import api from '../../../api';
 function CreateTenantForm() {
     const navigate = useNavigate();
     const [tenantName, setTenantName] = useState('');

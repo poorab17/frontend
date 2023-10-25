@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Notification from '../components/Notification';
-import api from '../api';
+import Notification from '../../../components/Notification';
+import api from '../../../api';
+import { Link } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
@@ -64,6 +65,16 @@ function CreateModuleForm() {
                     <Typography variant="h6">Create Module</Typography>
                 </Toolbar>
             </AppBar>
+            <Button
+                component={Link} // Using RouterLink from react-router-dom
+                to="/superadmin/modules"
+                variant="outlined"
+                color="primary"
+                style={{ marginTop: "20px", marginLeft: "20px", maxWidth: "100px" }}
+                size="small"
+            >
+                Back
+            </Button>
             <Container>
                 <form encType="multipart/form-data"> {/* Set encType for file uploads */}
                     <TextField

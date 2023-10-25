@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Notification from '../components/Notification';
-import api from '../api';
+import Notification from '../../../components/Notification';
+import { Link } from 'react-router-dom';
+import api from '../../../api';
 import {
     AppBar,
     Toolbar,
@@ -120,6 +121,16 @@ function EditModuleForm() {
                     <Typography variant="h6">Edit Module</Typography>
                 </Toolbar>
             </AppBar>
+            <Button
+                component={Link} // Using RouterLink from react-router-dom
+                to="/superadmin/modules"
+                variant="outlined"
+                color="primary"
+                style={{ marginTop: "20px", marginLeft: "20px", maxWidth: "100px" }}
+                size="small"
+            >
+                Back
+            </Button>
             <Container>
                 <form encType="multipart/form-data">
                     <TextField

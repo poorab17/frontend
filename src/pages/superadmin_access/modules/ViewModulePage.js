@@ -9,7 +9,7 @@ import {
     CssBaseline,
 } from '@mui/material';
 import { useParams, Link } from 'react-router-dom';
-import api from '../api';
+import api from '../../../api';
 
 function ViewModulePage() {
     const { moduleId } = useParams();
